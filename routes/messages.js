@@ -9,3 +9,5 @@ router.get("/", messageController.getAll);
 router.post("/", messageController.create);
 
  module.exports = router;
+
+ 
