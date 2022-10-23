@@ -4,10 +4,26 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+
+
+
+const messageRouter = require('./routes/messages');
+
+
+
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const port = 3000;
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017');
+
+app.use("/api/messages", messageRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,6 +52,9 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+app.listen(port, () => {
+  console.log(`Example app listening at ${port}`)
 });
 
 module.exports = app;
